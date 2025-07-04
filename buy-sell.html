@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buy / Sell</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #222;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .price {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      cursor: pointer;
+      padding: 10px 20px;
+      border-bottom: 3px solid transparent;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .tab.active {
+      color: #005eff;
+      border-color: #005eff;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .info {
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .action-btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .buy-btn {
+      background-color: #148d42;
+    }
+
+    .sell-btn {
+      background-color: #dc3545;
+    }
+
+    .max-btn {
+      float: right;
+      margin-top: -30px;
+      margin-right: 5px;
+      font-size: 13px;
+      cursor: pointer;
+      color: #007bff;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+    }
+
+    .modal-content h4 {
+      margin-bottom: 20px;
+    }
+
+    .modal-content button {
+      padding: 8px 16px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Buy / Sell</h2>
+    <div class="price">Current Price: <span style="color:#007bff">$200.00</span></div>
+
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('buy')">Buy</div>
+      <div class="tab" onclick="switchTab('sell')">Sell</div>
+    </div>
+
+    <div id="buy" class="form-section active">
+      <div class="form-group">
+        <label>Shares to Buy (SYM)</label>
+        <input type="number" id="buyShares" placeholder="Enter shares">
+        <div class="max-btn" onclick="fillMaxBuy()">Max</div>
+      </div>
+      <div class="form-group">
+        <label>Total Amount</label>
+        <input type="text" id="buyTotal" disabled value="$0.00">
+      </div>
+      <div class="info">Available Funds: $1,000.00</div>
+      <button class="action-btn buy-btn" onclick="showConfirmation('buy')">
+        <i class="fa-solid fa-cart-shopping"></i> Place Buy Order
+      </button>
+    </div>
+
+    <div id="sell" class="form-section">
+      <div class="form-group">
+        <label>Shares to Sell (SYM)</label>
+        <input type="number" id="sellShares" placeholder="Enter shares">
+        <div class="max-btn" onclick="fillMaxSell()">Max</div>
+      </div>
+      <div class="form-group">
+        <label>Total Amount</label>
+        <input type="text" id="sellTotal" disabled value="$0.00">
+      </div>
+      <div class="info">Available Shares: 12 shares</div>
+      <button class="action-btn sell-btn" onclick="showConfirmation('sell')">
+        <i class="fa-solid fa-sack-dollar"></i> Place Sell Order
+      </button>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmationModal">
+    <div class="modal-content">
+      <h4>Confirm Your Order</h4>
+      <p id="confirmText">Are you sure you want to proceed?</p>
+      <button onclick="confirmOrder()">Confirm</button>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+
+      document.querySelector(`#${tab}`).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    const price = 200.00;
+    const maxFunds = 1000;
+    const maxShares = 12;
+
+    document.getElementById('buyShares').addEventListener('input', () => {
+      const shares = parseFloat(event.target.value) || 0;
+      document.getElementById('buyTotal').value = `$${(shares * price).toFixed(2)}`;
+    });
+
+    document.getElementById('sellShares').addEventListener('input', () => {
+      const shares = parseFloat(event.target.value) || 0;
+      document.getElementById('sellTotal').value = `$${(shares * price).toFixed(2)}`;
+    });
+
+    function fillMaxBuy() {
+      const maxSharesBuy = Math.floor(maxFunds / price);
+      document.getElementById('buyShares').value = maxSharesBuy;
+      document.getElementById('buyTotal').value = `$${(maxSharesBuy * price).toFixed(2)}`;
+    }
+
+    function fillMaxSell() {
+      document.getElementById('sellShares').value = maxShares;
+      document.getElementById('sellTotal').value = `$${(maxShares * price).toFixed(2)}`;
+    }
+
+    function showConfirmation(type) {
+      const modal = document.getElementById('confirmationModal');
+      const shares = type === 'buy'
+        ? document.getElementById('buyShares').value
+        : document.getElementById('sellShares').value;
+
+      document.getElementById('confirmText').innerText = `Confirm to ${type} ${shares} shares?`;
+      modal.style.display = 'flex';
+    }
+
+    function confirmOrder() {
+      alert("Order placed successfully!");
+      document.getElementById('confirmationModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('confirmationModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>

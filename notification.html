@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notifications - INVESTOOMS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f5f7fb;
+      color: #1a1a1a;
+      transition: 0.3s ease;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+
+    nav {
+      background: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    body.dark-mode nav {
+      background: #222;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    body.dark-mode .logo {
+      color: #eee;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 6px 12px;
+    }
+
+    body.dark-mode .nav-links a {
+      color: #ddd;
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-icons input {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    body.dark-mode .card {
+      background: #1e1e1e;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .notification {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+    }
+
+    body.dark-mode .notification {
+      border-bottom: 1px solid #333;
+    }
+
+    .notification i {
+      font-size: 1.5rem;
+      color: #007bff;
+    }
+
+    .notification-text {
+      flex: 1;
+    }
+
+    .notification-text small {
+      display: block;
+      color: #888;
+    }
+
+    body.dark-mode .notification-text small {
+      color: #aaa;
+    }
+
+    footer {
+      background: #fff;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    body.dark-mode footer {
+      background: #111;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">INVESTOOMS</div>
+    <ul class="nav-links">
+      <li><a href="home1.html">Home</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="transfers.html">Transfers</a></li>
+      <li><a href="market.html">Market</a></li>
+    </ul>
+    <div class="nav-icons">
+      <input type="text" placeholder="Search..." />
+      <a href="notification.html" style="color: inherit; text-decoration: none;"><span>🔔</span></a>
+      <a href="settings.html" style="color: inherit; text-decoration: none;"><span>⚙️</span></a>
+      <a href="profile.html" style="color: inherit; text-decoration: none;"><span>👤</span></a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="card">
+      <h2>Notifications</h2>
+
+      <div class="notification">
+        <i class="fab fa-facebook"></i>
+        <div class="notification-text">
+          <strong>Successful Buy Order</strong><br>
+          You have successfully ensured a buy<br>
+          <small>7:21 PM</small>
+        </div>
+      </div>
+
+      <div class="notification">
+        <i class="fab fa-apple"></i>
+        <div class="notification-text">
+          <strong>Stock Alert - AAPL</strong><br>
+          Apple Inc. stock has increased 2.4% today<br>
+          <small>5:43 PM</small>
+        </div>
+      </div>
+
+      <div class="notification">
+        <i class="fab fa-google"></i>
+        <div class="notification-text">
+          <strong>Watchlist Notification</strong><br>
+          GOOG has reached your target price of $140<br>
+          <small>3:20 PM</small>
+        </div>
+      </div>
+
+      <div class="notification">
+        <i class="fas fa-info-circle"></i>
+        <div class="notification-text">
+          <strong>System Update</strong><br>
+          We’ve improved performance in your portfolio view<br>
+          <small>Yesterday</small>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 INVESTOOMS. All rights reserved. Trading involves risk.
+  </footer>
+
+  <script>
+    // Auto-apply dark mode if saved in localStorage
+    const isDark = localStorage.getItem("theme") === "dark";
+    if (isDark) {
+      document.body.classList.add("dark-mode");
+    }
+  </script>
+
+</body>
+</html>

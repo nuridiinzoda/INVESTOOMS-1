@@ -1,0 +1,669 @@
+/* Basic Reset & Variables */
+:root {
+    --background-color: #F8F9FA; /* Light grey background */
+    --text-color: #212529; /* Dark text */
+    --secondary-text-color: #6c757d; /* Medium grey for descriptions */
+    --card-bg: #FFFFFF; /* White card background */
+    --border-color: #E9ECEF; /* Light grey border */
+    --navbar-bg: #FFFFFF; /* Navbar background */
+    --navbar-border: #E0E0E0; /* Navbar top/bottom border */
+    --navbar-item-color: #6c757d; /* Navbar item color */
+    --navbar-item-active-color: #4A00E0; /* Navbar active item color (deep purple) */
+
+    /* Accent Colors inspired by your UI */
+    --primary-accent-dark: #4A00E0; /* Deep purple */
+    --primary-accent-light: #8E2DE2; /* Brighter purple/blue */
+    --secondary-accent-green: #28A745; /* Green for positive indicators */
+    --secondary-accent-teal: #17A2B8; /* Teal for neutral/info */
+
+    /* Canvas particle colors (very subtle) */
+    --particle-color-1: rgba(0, 123, 255, 0.05); /* Very light blue */
+    --particle-color-2: rgba(111, 66, 192, 0.05); /* Very light purple */
+    --particle-line-color: rgba(0, 123, 255, 0.02); /* Even lighter blue for lines */
+
+    --top-navbar-height: 55px; /* Define top navbar height */
+    --bottom-navbar-height: 70px; /* Define bottom navbar height */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for navbar links */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll from animations */
+    /* Default padding for desktop (top navbar) */
+    padding-top: var(--top-navbar-height);
+    padding-bottom: 0; /* No bottom padding on desktop by default */
+}
+
+/* Global Section Styling */
+section {
+    padding: 80px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 3em;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: var(--text-color); /* Default to dark text */
+}
+
+.section-header p {
+    font-size: 1.2em;
+    color: var(--secondary-text-color);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Gradient Text Classes - now applied to specific parts for accent */
+.gradient-text-blue-purple {
+    background: linear-gradient(to right, #007BFF, #6F42C0); /* Blue to purple */
+    -webkit-background-clip: text;
+    background-clip: text; /* Standard property */
+    -webkit-text-fill-color: transparent;
+    display: inline-block; /* Essential for text gradients */
+}
+
+.gradient-text-green-teal {
+    background: linear-gradient(to right, #28A745, #17A2B8); /* Green to teal */
+    -webkit-background-clip: text;
+    background-clip: text; /* Standard property */
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.gradient-text-green-blue {
+    background: linear-gradient(to right, #28A745, #007BFF); /* Green to blue */
+    -webkit-background-clip: text;
+    background-clip: text; /* Standard property */
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.text-dark {
+    color: var(--text-color); /* For parts of hero headline that are solid dark */
+}
+
+
+/* Buttons */
+.button {
+    display: inline-block;
+    padding: 14px 35px; /* Slightly larger padding */
+    border-radius: 8px; /* Slightly less rounded than before, matching your UIs */
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+}
+
+.primary-button {
+    background: linear-gradient(to right, var(--primary-accent-dark), var(--primary-accent-light));
+    color: white; /* Default text color for primary button is white */
+}
+
+.primary-button:hover {
+    background: linear-gradient(to right, #3A00B3, #7224B3); /* Darker shades on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-button {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.secondary-button:hover {
+    background-color: #F0F2F5; /* Very light grey on hover */
+    border-color: #D3D6DA;
+    color: var(--text-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.large-button {
+    padding: 18px 45px;
+    font-size: 1.2em;
+}
+
+.small-button {
+    padding: 8px 20px; /* Base smaller button style */
+    font-size: 0.9em;
+}
+
+/* Specific styles for the "Join" button in the top nav */
+.top-nav-links .button.primary-button {
+    padding: 10px 25px; /* Make it a bit bigger than `small-button` */
+    font-size: 1em; /* Slightly larger font */
+    color: white; /* Ensure text is white as requested */
+}
+
+
+/* Hero Section */
+.hero-section {
+    min-height: calc(100vh - var(--top-navbar-height)); /* Adjust based on top navbar height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--background-color);
+    padding: 40px 20px;
+}
+
+/* Canvas background animation */
+#heroBackgroundCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Subtle gradient overlay */
+.animated-gradient-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(100, 150, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(150, 100, 255, 0.03) 0%, transparent 50%);
+    background-size: 200% 200%;
+    opacity: 0.8;
+    animation: gradient-move 20s linear infinite alternate;
+    z-index: 1; /* Above canvas, below content */
+}
+
+@keyframes gradient-move {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+.sparkles-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2; /* Above gradient, below content */
+}
+
+.sparkle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7); /* Default, will be overridden by JS for subtle colors */
+    opacity: 0;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes sparkle-animation {
+    0% { opacity: 0; transform: scale(0) translateY(0); }
+    50% { opacity: 0.7; transform: scale(1) translateY(-10px); }
+    100% { opacity: 0; transform: scale(0) translateY(10px); }
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 3; /* Highest z-index for content */
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5em; /* ADJUSTED: Smaller font size for desktop h1 */
+    font-weight: 800;
+    margin-bottom: 20px; /* Slightly reduced margin */
+    line-height: 1.1;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.hero-content p {
+    font-size: 1.2em; /* Slightly smaller for better balance */
+    color: var(--secondary-text-color);
+    max-width: 700px;
+    margin: 0 auto 35px auto; /* Adjusted margin */
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .hero-buttons {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .hero-content h1 {
+        font-size: 4.5em; /* ADJUSTED: Smaller font size for larger screens */
+    }
+}
+
+
+/* Features Section */
+.features-section {
+    background-color: var(--background-color);
+    padding: 100px 20px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to br, rgba(0, 123, 255, 0.05), rgba(111, 66, 192, 0.05));
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: #D3D6DA;
+}
+
+.feature-card .icon-wrapper {
+    background: linear-gradient(to right, var(--primary-accent-dark), var(--primary-accent-light));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.feature-card:hover .icon-wrapper {
+    transform: scale(1.1);
+}
+
+.feature-card .icon {
+    width: 32px;
+    height: 32px;
+}
+
+.feature-card h3 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    position: relative;
+    z-index: 1;
+}
+
+.feature-card p {
+    font-size: 1em;
+    color: var(--secondary-text-color);
+    position: relative;
+    z-index: 1;
+}
+
+/* Separator */
+.separator {
+    width: 70%;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 80px auto;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    background-color: var(--background-color);
+    padding-bottom: 100px;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.testimonial-card p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.testimonial-author {
+    font-style: italic;
+    color: var(--secondary-text-color);
+    display: block;
+    text-align: right;
+    font-weight: 300;
+}
+
+/* CTA Section */
+.cta-section {
+    background-color: var(--card-bg);
+    padding: 100px 20px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.cta-section .section-header {
+    margin-bottom: 0;
+}
+
+.cta-section h2 {
+    margin-bottom: 25px;
+}
+
+.cta-section p {
+    margin-bottom: 40px;
+}
+
+
+/* Footer */
+.footer {
+    background-color: var(--background-color);
+    border-top: 1px solid var(--border-color);
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--secondary-text-color);
+}
+
+
+/* --- Top Navigation Bar (Desktop/Tablet) --- */
+.top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--top-navbar-height);
+    background-color: var(--navbar-bg);
+    border-bottom: 1px solid var(--navbar-border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    display: flex; /* Flex container for alignment */
+    align-items: center; /* Center items vertically */
+    padding: 0 20px; /* Padding for the navbar itself */
+}
+
+.top-navbar-content {
+    max-width: 1200px; /* Match max-width of content sections */
+    width: 100%;
+    margin: 0 auto; /* Center content */
+    display: flex;
+    justify-content: space-between; /* Space logo and nav links */
+    align-items: center;
+}
+
+.top-navbar .logo {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--text-color);
+    text-decoration: none;
+    background: linear-gradient(to right, var(--primary-accent-dark), var(--primary-accent-light));
+    -webkit-background-clip: text;
+    background-clip: text; /* Standard property */
+    -webkit-text-fill-color: transparent;
+    display: inline-block; /* Required for text gradient */
+}
+
+.top-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.top-nav-item {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 3px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.top-nav-item:not(.button)::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-accent-light);
+    transition: width 0.3s ease;
+}
+
+.top-nav-item:not(.button):hover::after,
+.top-nav-item.active:not(.button)::after {
+    width: 100%;
+}
+
+.top-nav-item.active:not(.button) {
+    color: var(--primary-accent-dark);
+}
+
+
+/* --- Bottom Navigation Bar (Mobile) --- */
+.bottom-navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--bottom-navbar-height);
+    background-color: var(--navbar-bg);
+    border-top: 1px solid var(--navbar-border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--navbar-item-color);
+    font-size: 0.8em;
+    font-weight: 600;
+    padding: 8px 5px;
+    transition: all 0.3s ease;
+    flex: 1;
+    max-width: 90px;
+}
+
+.nav-item:hover {
+    color: var(--navbar-item-active-color);
+    transform: translateY(-2px);
+}
+
+.nav-item.active {
+    color: var(--navbar-item-active-color);
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    stroke: currentColor;
+    transition: stroke 0.3s ease;
+}
+
+.nav-text {
+    white-space: nowrap;
+}
+
+
+/* --- Responsive Adjustments for Navbars --- */
+
+/* Hide top navbar and show bottom navbar on mobile */
+@media (max-width: 768px) {
+    .top-navbar {
+        display: none;
+    }
+    .bottom-navbar {
+        display: flex; /* Ensure it's displayed */
+    }
+    body {
+        padding-top: 0; /* No top padding for top nav */
+        padding-bottom: var(--bottom-navbar-height); /* Space for bottom nav */
+    }
+    .hero-section {
+        /* Adjust min-height for hero section if no top nav */
+        min-height: calc(100vh - var(--bottom-navbar-height));
+    }
+}
+
+/* Hide bottom navbar and show top navbar on larger screens */
+@media (min-width: 769px) {
+    .top-navbar {
+        display: flex; /* Ensure it's displayed */
+    }
+    .bottom-navbar {
+        display: none;
+    }
+    body {
+        padding-top: var(--top-navbar-height); /* Space for top nav */
+        padding-bottom: 0; /* No bottom padding for bottom nav */
+    }
+    .hero-section {
+        /* Adjust min-height for hero section with top nav */
+        min-height: calc(100vh - var(--top-navbar-height));
+    }
+}
+
+
+/* Animations for Fade-in (Hero Section) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+
+
+/* Animations for Scroll Fade-in (JavaScript controlled) */
+.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* General responsive adjustments */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 3em;
+    }
+    .hero-content p {
+        font-size: 1.1em;
+    }
+    .section-header h2 {
+        font-size: 2.5em;
+    }
+    .section-header p {
+        font-size: 1em;
+    }
+    .button {
+        width: 100%;
+    }
+    .features-grid, .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    section {
+        padding: 60px 15px;
+    }
+    .separator {
+        margin: 60px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+}
+
+

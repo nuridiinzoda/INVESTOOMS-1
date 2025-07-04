@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Upgrade to Pro - INVESTOOMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #007bff;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-right input[type="text"] {
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-box {
+      background: #f1f4f9;
+      border-left: 5px solid #007bff;
+      padding: 1.2rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+
+    .feature-box h3 {
+      margin-top: 0;
+    }
+
+    .upgrade-banner {
+      background: #ffd700;
+      color: #333;
+      text-align: center;
+      padding: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    .upgrade-btn {
+      display: block;
+      background-color: #007bff;
+      color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      margin: 2rem auto;
+      max-width: 300px;
+      transition: background 0.3s ease;
+    }
+
+    .upgrade-btn:hover {
+      background-color: #0056b3;
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #ddd;
+      padding: 1rem 2rem;
+    }
+
+    @media (max-width: 600px) {
+      nav a {
+        margin: 0 10px;
+        font-size: 14px;
+      }
+      .header-right {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #f1f1f1;
+    }
+
+    body.dark-mode header,
+    body.dark-mode footer,
+    body.dark-mode .container {
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      border-color: #333;
+    }
+
+    body.dark-mode .feature-box {
+      background: #2c2c2c;
+      border-left: 5px solid #66b2ff;
+    }
+
+    body.dark-mode .upgrade-btn {
+      background-color: #66b2ff;
+    }
+
+    body.dark-mode .upgrade-btn:hover {
+      background-color: #3399ff;
+    }
+
+    body.dark-mode input[type="text"] {
+      background-color: #333;
+      color: #f1f1f1;
+      border: 1px solid #666;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div><strong>INVESTOOMS</strong></div>
+    <nav>
+      <a href="home1.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="market.html">Market</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+    <div class="header-right">
+      <input type="text" placeholder="Search...">
+      <a href="notification.html" style="text-decoration: none; color: inherit;">🔔</a>
+      <a href="settings.html" style="text-decoration: none; color: inherit;">⚙️</a>
+      <a href="profile.html" style="text-decoration: none; color: inherit;">👤</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Upgrade to <span style="color:#007bff;">INVESTOOMS Pro</span></h1>
+    <p style="text-align:center; font-size: 1rem;">Unlock powerful tools for smarter investing and better control.</p>
+
+    <div class="feature-box">
+      <h3><i class="fas fa-chart-line"></i> Advanced Analytics</h3>
+      <p>Access deeper insights, technical indicators, and real-time market analysis.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3><i class="fas fa-paint-brush"></i> Custom Dashboards</h3>
+      <p>Personalize your trading workspace, add notes, and highlight favorite assets.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3><i class="fas fa-headset"></i> Priority Support</h3>
+      <p>Get faster responses and dedicated support for Pro users.</p>
+    </div>
+
+    <div class="upgrade-banner">
+      🔥 Limited Time Offer: Save 25% when you upgrade now!
+    </div>
+
+    <a href="#" class="upgrade-btn">🚀 Upgrade & Save 25%</a>
+  </div>
+
+  <footer>
+    &copy; 2025 INVESTOOMS. All rights reserved.
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    });
+  </script>
+
+</body>
+</html>

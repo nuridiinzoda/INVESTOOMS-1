@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transfers - INVESTOOMS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    nav {
+      background: var(--card);
+      padding:15px 40px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    nav .nav-links a {
+      margin:0 20px;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:500;
+    }
+
+    nav input[type="text"] {
+      padding:6px 12px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      background:var(--input-bg);
+      color: var(--text);
+    }
+
+    .stock-section {
+      padding: 40px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .stock-section h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: inherit;
+    }
+
+    .stock-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .stock-card {
+      background-color: var(--card);
+      border-radius: 16px;
+      padding: 20px 24px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.2s ease;
+    }
+
+    .stock-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stock-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stock-info img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+    }
+
+    .stock-meta h4,
+    .stock-meta p,
+    .stock-price span {
+      color: var(--text);
+    }
+
+    .stock-meta h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .stock-meta p {
+      margin: 2px 0 0;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .stock-price {
+      text-align: right;
+    }
+
+    .stock-price span {
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .positive { color: limegreen; }
+    .negative { color: red; }
+
+    footer {
+      background-color: var(--card);
+      padding: 40px 80px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-top: 1px solid #ddd;
+      margin-top: 80px;
+    }
+
+    footer .footer-column { margin-bottom: 20px; }
+    footer .footer-column h4 { margin-bottom: 15px; }
+    footer .footer-column a {
+      display: block;
+      text-decoration: none;
+      color: var(--text-soft);
+      margin: 4px 0;
+      font-size: 0.95rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+
+    :root {
+      --bg: #f5f7fb;
+      --text: #111;
+      --text-soft: #555;
+      --card: #fff;
+      --input-bg: #fff;
+    }
+
+    html[data-theme='dark'] {
+      --bg: #1c1e22;
+      --text: #f0f0f0;
+      --text-soft: #aaa;
+      --card: #2a2d32;
+      --input-bg: #333;
+    }
+
+    body.dark-mode {
+      background-color: #121212 !important;
+      color: #f1f1f1 !important;
+    }
+
+    body.dark-mode nav,
+    body.dark-mode footer,
+    body.dark-mode .container,
+    body.dark-mode .widget,
+    body.dark-mode .section,
+    body.dark-mode .stock-card {
+      background-color: #1f1f1f !important;
+      color: #e0e0e0 !important;
+      box-shadow: none;
+    }
+
+    body.dark-mode a {
+      color: #89b4fa !important;
+    }
+
+    body.dark-mode input[type="text"] {
+      background-color: #333 !important;
+      color: #fff !important;
+      border: 1px solid #555 !important;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navbar matching portfolio.html -->
+<nav>
+  <div><strong>INVESTOOMS</strong></div>
+  <div class="nav-links">
+    <a href="home1.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="transfers.html">Transfers</a>
+    <a href="market.html">Market</a>
+  </div>
+  <div>
+    <input type="text" placeholder="Search...">
+    <a href="notification.html" style="color: inherit; text-decoration: none;"><span>🔔</span></a>
+    <a href="settings.html" style="color: inherit; text-decoration: none;"><span>⚙️</span></a>
+    <a href="profile.html" style="color: inherit; text-decoration: none;"><span>👤</span></a>
+    <span id="username" style="margin-right: 10px; font-weight: 500;"></span>
+  </div>
+</nav>
+
+<!-- Main content -->
+<section class="stock-section">
+  <h2>Select a Stock to Buy or Sell</h2>
+  <div class="stock-grid">
+    <!-- STOCK CARDS (do not change) -->
+    <div class="stock-card">
+      <div class="stock-info">
+        <img src="https://logo.clearbit.com/apple.com" alt="Apple">
+        <a href="stock-appl.html" style="color: inherit; text-decoration: none;">
+          <div class="stock-meta"><h4>Apple Inc.</h4><p>AAPL</p></div>
+        </a>
+      </div>
+      <div class="stock-price"><span>$170.80</span><div class="positive">+0.81%</div></div>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-info">
+        <img src="https://logo.clearbit.com/tesla.com" alt="Tesla">
+        <a href="stock-tsla.html" style="color: inherit; text-decoration: none;">
+          <div class="stock-meta"><h4>Tesla Inc.</h4><p>TSLA</p></div>
+        </a>
+      </div>
+      <div class="stock-price"><span>$200.00</span><div class="negative">-0.56%</div></div>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-info">
+        <img src="https://logo.clearbit.com/meta.com" alt="Meta">
+        <a href="stock-meta.html" style="color: inherit; text-decoration: none;"><div class="stock-meta"><h4>Meta Platforms</h4><p>META</p></div></a>
+      </div>
+      <div class="stock-price"><span>$260.45</span><div class="positive">+1.94%</div></div>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-info">
+        <img src="https://logo.clearbit.com/netflix.com" alt="Netflix">
+        <a href="stock- nflx.html" style="color: inherit; text-decoration: none;"><div class="stock-meta"><h4>Netflix Inc.</h4><p>NFLX</p></div></a>
+      </div>
+      <div class="stock-price"><span>$88.91</span><div class="positive">+1.29%</div></div>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-info">
+        <img src="https://logo.clearbit.com/abc.xyz" alt="Alphabet">
+        <a href="stock-alphabet.html" style="color: inherit; text-decoration: none;"><div class="stock-meta"><h4>Alphabet Inc.</h4><p>GOOG</p></div></a>
+      </div>
+      <div class="stock-price"><span>$145.00</span><div class="positive">+1.20%</div></div>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-info">
+        <img src="https://logo.clearbit.com/microsoft.com" alt="Microsoft">
+        <a href="stock-details-microsoft.html" style="color: inherit; text-decoration: none;"><div class="stock-meta"><h4>Microsoft Corp.</h4><p>MSFT</p></div></a>
+      </div>
+      <div class="stock-price"><span>$320.40</span><div class="negative">-0.22%</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-column">
+    <h4>INVESTOOMS</h4>
+    <p>Trade smarter, invest confidently.</p>
+    <div class="social-icons">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-linkedin-in"></i>
+    </div>
+  </div>
+  <div class="footer-column">
+    <h4>Company</h4>
+    <a href="#">About Us</a>
+    <a href="#">Careers</a>
+    <a href="#">Press</a>
+    <a href="#">Partnerships</a>
+  </div>
+  <div class="footer-column">
+    <h4>Resources</h4>
+    <a href="#">Blog</a>
+    <a href="#">FAQs</a>
+    <a href="#">API Docs</a>
+    <a href="#">Security</a>
+  </div>
+  <div class="footer-column">
+    <h4>Legal</h4>
+    <a href="#">Terms of Service</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Risk Disclosure</a>
+    <a href="#">Regulatory Info</a>
+  </div>
+</footer>
+
+<div class="footer-bottom">
+  &copy; 2025 INVESTOOMS. All rights reserved. Trading involves risk.
+</div>
+
+<!-- Theme + Username -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const theme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", theme);
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+
+    const userName = localStorage.getItem("userName") || localStorage.getItem("userEmail") || "Guest";
+    document.getElementById("username").textContent = userName;
+  });
+</script>
+
+</body>
+</html>

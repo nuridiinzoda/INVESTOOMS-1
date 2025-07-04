@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Microsoft Corp (MSFT) - Stock Details</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg-light: #f4f6f9;
+      --bg-dark: #121212;
+      --card-light: #ffffff;
+      --card-dark: #1f1f1f;
+      --text-light: #000;
+      --text-dark: #fff;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--card-light);
+      padding: 1rem 2rem;
+    }
+
+    body.dark-mode .navbar {
+      background-color: var(--card-dark);
+    }
+
+    .navbar a {
+      color: inherit;
+      margin: 0 0.75rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar .user {
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .section {
+      background-color: var(--card-light);
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    body.dark-mode .section {
+      background-color: var(--card-dark);
+    }
+
+    .stock-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tv-widget {
+      height: 500px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-spacing: 0;
+    }
+
+    th, td {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(128,128,128,0.2);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    body.dark-mode input {
+      background-color: #2b2b2b;
+      color: white;
+      border: 1px solid #555;
+    }
+
+    .buy-btn {
+      background-color: #22c55e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 1rem;
+      flex: 1;
+    }
+
+    .sell-btn {
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 1rem;
+      flex: 1;
+    }
+
+    .news-tag {
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: white;
+    }
+
+    .tag-blue { background-color: #3b82f6; }
+    .tag-green { background-color: #10b981; }
+    .tag-yellow { background-color: #facc15; }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: var(--card-light);
+    }
+
+    body.dark-mode .footer {
+      background-color: var(--card-dark);
+    }
+
+    .dark-mode .card, 
+    .dark-mode .section, 
+    .dark-mode input, 
+    .dark-mode textarea {
+      background-color: #1e1e1e;
+      color: #fff;
+      border-color: #333;
+    }
+
+    .dark-mode .btn-confirm {
+      background-color: #2a9d8f;
+      color: white;
+    }
+
+    .dark-mode .btn-cancel {
+      background-color: #aaa;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div><strong>INVESTOOMS</strong></div>
+    <div>
+      <a href="home1.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="market.html">Market</a>
+    </div>
+    <div class="user" id="username">User</div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Header -->
+    <div class="section stock-header">
+      <h1>Microsoft Corp (MSFT)</h1>
+      <div style="font-size: 1.5rem;">
+        $374.18 <span style="color: green;">(+0.89%)</span>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="section">
+      <div class="tv-widget">
+        <div id="tradingview_chart"></div>
+      </div>
+    </div>
+
+    <!-- Buy/Sell -->
+    <div class="section buy-sell">
+      <h2>Trade MSFT</h2>
+      <input type="number" id="quantity" placeholder="Enter quantity" />
+      <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+        <button class="buy-btn" onclick="confirmOrder('buy')"><i class="fas fa-arrow-up"></i> Buy</button>
+        <button class="sell-btn" onclick="confirmOrder('sell')"><i class="fas fa-arrow-down"></i> Sell</button>
+      </div>
+
+      <!-- Confirmation Box -->
+      <div id="confirmation-box" style="display:none; margin-top: 2rem; background:#f3f4f6; padding:1.25rem; border-radius: 12px;">
+        <h3>Confirm Your Order</h3>
+        <p>You are about to <strong id="action-type">buy</strong> <strong id="confirm-qty">0</strong> shares of <strong>MSFT</strong>.</p>
+        <button onclick="completeOrder()" style="padding: 0.6rem 1.5rem; background-color: #2563eb; color: white; border: none; border-radius: 8px;">Confirm</button>
+        <button onclick="cancelOrder()" style="padding: 0.6rem 1.5rem; margin-left: 1rem; background-color: gray; color: white; border: none; border-radius: 8px;">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Grid: Info + News -->
+    <div class="grid-2">
+      <!-- Overview -->
+      <div class="section">
+        <h2>Company Overview</h2>
+        <table>
+          <tr><th>Sector</th><td>Technology</td></tr>
+          <tr><th>Industry</th><td>Software—Infrastructure</td></tr>
+          <tr><th>Market Cap</th><td>$2.81T</td></tr>
+          <tr><th>52-Week Range</th><td>$280 – $380</td></tr>
+          <tr><th>P/E Ratio</th><td>34.2</td></tr>
+          <tr><th>Dividend Yield</th><td>0.79%</td></tr>
+        </table>
+      </div>
+
+      <!-- News -->
+      <div class="section">
+        <h2>Latest News</h2>
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div style="display: flex; align-items: flex-start; gap: 1rem;">
+            <span class="news-tag tag-blue">Earnings</span>
+            <div>
+              <div style="font-weight: 600;">Microsoft Beats Earnings Expectations for Q3</div>
+              <div style="font-size: 0.85rem; color: gray;">CNBC • 1 hour ago</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 1rem;">
+            <span class="news-tag tag-green">AI</span>
+            <div>
+              <div style="font-weight: 600;">Copilot AI Expands to Office Suite Globally</div>
+              <div style="font-size: 0.85rem; color: gray;">The Verge • 3 hours ago</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 1rem;">
+            <span class="news-tag tag-yellow">Event</span>
+            <div>
+              <div style="font-weight: 600;">Microsoft Ignite 2025 Set for September in Seattle</div>
+              <div style="font-size: 0.85rem; color: gray;">ZDNet • 4 hours ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">&copy; 2025 StockWeb</div>
+
+  <!-- Scripts -->
+  <script src="https://s3.tradingview.com/tv.js"></script>
+  <script>
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") document.body.classList.add("dark-mode");
+
+    const fullName = localStorage.getItem("fullName") || "User";
+    document.getElementById("username").textContent = fullName;
+
+    new TradingView.widget({
+      container_id: "tradingview_chart",
+      symbol: "NASDAQ:MSFT",
+      width: "100%",
+      height: "500",
+      theme: theme === "dark" ? "dark" : "light",
+      interval: "D",
+      locale: "en",
+      style: "1",
+      toolbar_bg: "#f1f3f6",
+      enable_publishing: false,
+      allow_symbol_change: false
+    });
+
+    function confirmOrder(type) {
+      const qty = document.getElementById("quantity").value;
+      if (!qty || qty <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+      }
+      document.getElementById("confirm-qty").textContent = qty;
+      document.getElementById("action-type").textContent = type;
+      document.getElementById("confirmation-box").style.display = "block";
+    }
+
+    function cancelOrder() {
+      document.getElementById("confirmation-box").style.display = "none";
+    }
+
+    function completeOrder() {
+      const qty = document.getElementById("confirm-qty").textContent;
+      const action = document.getElementById("action-type").textContent;
+      alert(`✅ Successfully ${action} ${qty} MSFT shares!`);
+      document.getElementById("confirmation-box").style.display = "none";
+      document.getElementById("quantity").value = "";
+    }
+  </script>
+</body>
+</html>

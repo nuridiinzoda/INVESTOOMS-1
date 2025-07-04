@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9f9f9;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.welcome-container {
+  width: 90%;
+  max-width: 1200px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  padding: 60px;
+}
+
+.welcome-text {
+  width: 50%;
+}
+
+.welcome-text h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.welcome-text h1 span {
+  color: #2e3b91;
+}
+
+.welcome-text p {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.welcome-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.welcome-buttons button {
+  padding: 14px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.welcome-buttons .signup {
+  background-color: #2e3b91;
+  color: white;
+}
+
+.welcome-buttons .signin {
+  background-color: #e8fcf7;
+  color: #2e3b91;
+}
+
+.welcome-graphic {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-graphic img {
+  width: 90%;
+  max-width: 500px;
+}
+
+@media (max-width: 768px) {
+  .welcome-container {
+    flex-direction: column;
+    padding: 30px;
+  }
+
+  .welcome-text, .welcome-graphic {
+    width: 100%;
+    text-align: center;
+  }
+
+  .welcome-buttons {
+    align-items: center;
+  }
+}
+
+/* Toggle Switch */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: sans-serif;
+  z-index: 999;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 34px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* Dark Theme Styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark-mode .card,
+body.dark-mode .navbar,
+body.dark-mode .footer {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark-mode a {
+  color: #90caf9;
+}
