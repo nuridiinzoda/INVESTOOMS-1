@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notifications - INVESTOOMS</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f5f7fb;
+      color: #1a1a1a;
+      transition: 0.3s ease;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #fff;
+    }
+
+    .navbar {
+      background-color: #ffffff;
+      padding: 14px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .search-box input {
+      padding: 7px 12px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+    }
+
+    .icons i {
+      margin-left: 15px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Dark Mode Navbar */
+    body.dark-mode .navbar {
+      background-color: #1f1f1f !important;
+    }
+
+    body.dark-mode .nav-links a {
+      color: #ffffff !important;
+    }
+
+    body.dark-mode .search-box input {
+      background-color: #333 !important;
+      color: #fff !important;
+      border: 1px solid #555 !important;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    body.dark-mode .card {
+      background: #1e1e1e;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .notification {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+      color: inherit;
+    }
+
+    body.dark-mode .notification {
+      border-bottom: 1px solid #333;
+      color: #fff;
+    }
+
+    .notification i {
+      font-size: 1.5rem;
+      color: #007bff;
+    }
+
+    body.dark-mode .notification i {
+      color: #fff;
+    }
+
+    .notification-text small {
+      display: block;
+      color: #888;
+    }
+
+    body.dark-mode .notification-text small {
+      color: #ccc;
+    }
+
+    footer {
+      background-color: #ffffff;
+      padding: 40px 80px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-top: 1px solid #ddd;
+      margin-top: 80px;
+    }
+
+    body.dark-mode footer {
+      background-color: #1f1f1f;
+      border-color: #333;
+    }
+
+    footer .footer-column h4 {
+      margin-bottom: 15px;
+    }
+
+    footer .footer-column a {
+      display: block;
+      text-decoration: none;
+      color: #555;
+      margin: 4px 0;
+      font-size: 0.95rem;
+    }
+
+    body.dark-mode footer .footer-column a {
+      color: #ccc;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    body.dark-mode .footer-bottom {
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar d-flex justify-content-between align-items-center">
+  <div class="logo">INVESTOOMS</div>
+  <div class="nav-links d-flex align-items-center">
+    <a href="home1.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="transfers.html">Transfers</a>
+    <a href="market.html">Market</a>
+  </div>
+  <div class="d-flex align-items-center gap-3">
+    <input type="text" placeholder="Search stocks..." class="form-control" style="max-width: 180px;">
+    <a href="notification.html" title="Notifications"><i class="fas fa-bell" style="color: orange;"></i></a>
+    <a href="settings.html" title="Settings"><i class="fas fa-cog" style="color: #aaa;"></i></a>
+    <a href="profile.html" title="Profile" style="color: inherit; text-decoration: none;"><span id="welcomeUser" style="font-weight: 500;">👤</span></a>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main class="container py-4">
+  <div class="card">
+    <h2>Notifications</h2>
+
+    <div class="notification">
+      <i class="fab fa-facebook"></i>
+      <div class="notification-text">
+        <strong>Successful Buy Order</strong><br>
+        You have successfully ensured a buy<br>
+        <small>7:21 PM</small>
+      </div>
+    </div>
+
+    <div class="notification">
+      <i class="fab fa-apple"></i>
+      <div class="notification-text">
+        <strong>Stock Alert - AAPL</strong><br>
+        Apple Inc. stock has increased 2.4% today<br>
+        <small>5:43 PM</small>
+      </div>
+    </div>
+
+    <div class="notification">
+      <i class="fab fa-google"></i>
+      <div class="notification-text">
+        <strong>Watchlist Notification</strong><br>
+        GOOG has reached your target price of $140<br>
+        <small>3:20 PM</small>
+      </div>
+    </div>
+
+    <div class="notification">
+      <i class="fas fa-info-circle"></i>
+      <div class="notification-text">
+        <strong>System Update</strong><br>
+        We’ve improved performance in your portfolio view<br>
+        <small>Yesterday</small>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-column">
+    <h4>INVESTOOMS</h4>
+    <p>Trade smarter, invest confidently.</p>
+    <div class="social-icons">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-linkedin-in"></i>
+    </div>
+  </div>
+  <div class="footer-column"><h4>Company</h4><a href="#">About Us</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Partnerships</a></div>
+  <div class="footer-column"><h4>Resources</h4><a href="#">Blog</a><a href="#">FAQs</a><a href="#">API Docs</a><a href="#">Security</a></div>
+  <div class="footer-column"><h4>Legal</h4><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">Risk Disclosure</a><a href="#">Regulatory Info</a></div>
+</footer>
+<div class="footer-bottom">
+  &copy; 2025 INVESTOOMS. All rights reserved. Trading involves risk.
+</div>
+
+<!-- Scripts -->
+<script>
+  // Load dark mode if enabled
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  // Show username
+  const email = localStorage.getItem("currentUser");
+  const name = localStorage.getItem(email + "_name");
+  if (name) {
+    document.getElementById("welcomeUser").textContent = `👤 ${name}`;
+  }
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

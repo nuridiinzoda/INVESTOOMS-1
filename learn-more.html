@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More - INVESTOOMS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    /* Basic Reset & Variables */
+:root {
+--background-color: #F8F9FA; /* Light grey background */
+--text-color: #212529; /* Dark text */
+--secondary-text-color: #6c757d; /* Medium grey for descriptions */
+--card-bg: #FFFFFF; /* White card background */
+--border-color: #E9ECEF; /* Light grey border */
+--navbar-bg: #FFFFFF; /* Navbar background */
+--navbar-border: #E0E0E0; /* Navbar top/bottom border */
+--navbar-item-color: #6c757d; /* Navbar item color */
+--navbar-item-active-color: #4A00E0; /* Navbar active item color (deep purple) */
+
+/* Accent Colors inspired by your UI */
+--primary-accent-dark: #4A00E0; /* Deep purple */
+--primary-accent-light: #8E2DE2; /* Brighter purple/blue */
+--secondary-accent-green: #28A745; /* Green for positive indicators */
+--secondary-accent-teal: #17A2B8; /* Teal for neutral/info */
+
+/* Canvas particle colors (very subtle) */
+--particle-color-1: rgba(0, 123, 255, 0.05); /* Very light blue */
+--particle-color-2: rgba(111, 66, 192, 0.05); /* Very light purple */
+--particle-line-color: rgba(0, 123, 255, 0.02); /* Even lighter blue for lines */
+
+--top-navbar-height: 55px; /* Define top navbar height */
+--bottom-navbar-height: 70px; /* Define bottom navbar height */
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+html {
+scroll-behavior: smooth; /* Smooth scrolling for navbar links */
+}
+
+body {
+font-family: 'Inter', sans-serif;
+background-color: var(--background-color);
+color: var(--text-color);
+line-height: 1.6;
+overflow-x: hidden; /* Prevent horizontal scroll from animations */
+/* Default padding for desktop (top navbar) */
+padding-top: var(--top-navbar-height);
+padding-bottom: 0; /* No bottom padding on desktop by default */
+}
+
+/* Global Section Styling */
+section {
+padding: 80px 20px;
+position: relative;
+z-index: 1;
+}
+
+.section-header {
+text-align: center;
+margin-bottom: 60px;
+}
+
+.section-header h2 {
+font-size: 3em;
+font-weight: 800;
+margin-bottom: 15px;
+color: var(--text-color); /* Default to dark text */
+}
+
+.section-header p {
+font-size: 1.2em;
+color: var(--secondary-text-color);
+max-width: 800px;
+margin: 0 auto;
+}
+
+/* Gradient Text Classes - now applied to specific parts for accent */
+.gradient-text-blue-purple {
+background: linear-gradient(to right, #007BFF, #6F42C0); /* Blue to purple */
+-webkit-background-clip: text;
+background-clip: text; /* Standard property */
+-webkit-text-fill-color: transparent;
+display: inline-block; /* Essential for text gradients */
+}
+
+.gradient-text-green-teal {
+background: linear-gradient(to right, #28A745, #17A2B8); /* Green to teal */
+-webkit-background-clip: text;
+background-clip: text; /* Standard property */
+-webkit-text-fill-color: transparent;
+display: inline-block;
+}
+
+.gradient-text-green-blue {
+background: linear-gradient(to right, #28A745, #007BFF); /* Green to blue */
+-webkit-background-clip: text;
+background-clip: text; /* Standard property */
+-webkit-text-fill-color: transparent;
+display: inline-block;
+}
+
+.text-dark {
+color: var(--text-color); /* For parts of hero headline that are solid dark */
+}
+
+
+/* Buttons */
+.button {
+display: inline-block;
+padding: 14px 35px; /* Slightly larger padding */
+border-radius: 8px; /* Slightly less rounded than before, matching your UIs */
+text-decoration: none;
+font-weight: 600;
+transition: all 0.3s ease;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+}
+
+.primary-button {
+background: linear-gradient(to right, var(--primary-accent-dark), var(--primary-accent-light));
+color: white; /* Default text color for primary button is white */
+}
+
+.primary-button:hover {
+background: linear-gradient(to right, #3A00B3, #7224B3); /* Darker shades on hover */
+transform: translateY(-2px);
+box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-button {
+background-color: var(--card-bg);
+border: 1px solid var(--border-color);
+color: var(--text-color);
+}
+
+.secondary-button:hover {
+background-color: #F0F2F5; /* Very light grey on hover */
+border-color: #D3D6DA;
+color: var(--text-color);
+transform: translateY(-2px);
+box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.large-button {
+padding: 18px 45px;
+font-size: 1.2em;
+}
+
+.small-button {
+padding: 8px 20px; /* Base smaller button style */
+font-size: 0.9em;
+}
+
+/* Specific styles for the "Join" button in the top nav */
+.top-nav-links .button.primary-button {
+padding: 10px 25px; /* Make it a bit bigger than `small-button` */
+font-size: 1em; /* Slightly larger font */
+color: white; /* Ensure text is white as requested */
+}
+
+
+/* Hero Section */
+.hero-section {
+min-height: calc(100vh - var(--top-navbar-height)); /* Adjust based on top navbar height */
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+overflow: hidden;
+position: relative;
+background-color: var(--background-color);
+padding: 40px 20px;
+}
+
+/* Canvas background animation */
+#heroBackgroundCanvas {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+z-index: 0;
+}
+
+/* Subtle gradient overlay */
+.animated-gradient-bg {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+background: radial-gradient(circle at 10% 20%, rgba(100, 150, 255, 0.03) 0%, transparent 50%),
+            radial-gradient(circle at 90% 80%, rgba(150, 100, 255, 0.03) 0%, transparent 50%);
+background-size: 200% 200%;
+opacity: 0.8;
+animation: gradient-move 20s linear infinite alternate;
+z-index: 1; /* Above canvas, below content */
+}
+
+@keyframes gradient-move {
+0% { background-position: 0% 0%; }
+100% { background-position: 100% 100%; }
+}
+
+.sparkles-container {
+position: absolute;
+inset: 0;
+pointer-events: none;
+overflow: hidden;
+z-index: 2; /* Above gradient, below content */
+}
+
+.sparkle {
+position: absolute;
+border-radius: 50%;
+background-color: rgba(255, 255, 255, 0.7); /* Default, will be overridden by JS for subtle colors */
+opacity: 0;
+animation-timing-function: ease-in-out;
+}
+
+@keyframes sparkle-animation {
+0% { opacity: 0; transform: scale(0) translateY(0); }
+50% { opacity: 0.7; transform: scale(1) translateY(-10px); }
+100% { opacity: 0; transform: scale(0) translateY(10px); }
+}
+
+
+.hero-content {
+position: relative;
+z-index: 3; /* Highest z-index for content */
+max-width: 900px;
+margin: 0 auto;
+padding: 0 20px;
+}
+
+.hero-content h1 {
+font-size: 3.5em; /* ADJUSTED: Smaller font size for desktop h1 */
+font-weight: 800;
+margin-bottom: 20px; /* Slightly reduced margin */
+line-height: 1.1;
+text-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.hero-content p {
+font-size: 1.2em; /* Slightly smaller for better balance */
+color: var(--secondary-text-color);
+max-width: 700px;
+margin: 0 auto 35px auto; /* Adjusted margin */
+}
+
+.hero-buttons {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+}
+
+@media (min-width: 768px) {
+.hero-buttons {
+    flex-direction: row;
+    justify-content: center;
+}
+.hero-content h1 {
+    font-size: 4.5em; /* ADJUSTED: Smaller font size for larger screens */
+}
+}
+
+
+/* Features Section */
+.features-section {
+background-color: var(--background-color);
+padding: 100px 20px;
+}
+
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 30px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.feature-card {
+background-color: var(--card-bg);
+border: 1px solid var(--border-color);
+border-radius: 12px;
+padding: 30px;
+text-align: center;
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.feature-card::before {
+content: '';
+position: absolute;
+inset: 0;
+background: linear-gradient(to br, rgba(0, 123, 255, 0.05), rgba(111, 66, 192, 0.05));
+opacity: 0;
+filter: blur(20px);
+transition: opacity 0.3s ease;
+z-index: 0;
+}
+
+.feature-card:hover::before {
+opacity: 1;
+}
+
+.feature-card:hover {
+transform: translateY(-8px) scale(1.02);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+border-color: #D3D6DA;
+}
+
+.feature-card .icon-wrapper {
+background: linear-gradient(to right, var(--primary-accent-dark), var(--primary-accent-light));
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+margin-bottom: 20px;
+color: white;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease;
+position: relative;
+z-index: 1;
+}
+
+.feature-card:hover .icon-wrapper {
+transform: scale(1.1);
+}
+
+.feature-card .icon {
+width: 32px;
+height: 32px;
+}
+
+.feature-card h3 {
+font-size: 1.6em;
+font-weight: 700;
+margin-bottom: 10px;
+color: var(--text-color);
+position: relative;
+z-index: 1;
+}
+
+.feature-card p {
+font-size: 1em;
+color: var(--secondary-text-color);
+position: relative;
+z-index: 1;
+}
+
+/* Separator */
+.separator {
+width: 70%;
+height: 1px;
+background-color: var(--border-color);
+margin: 80px auto;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+background-color: var(--background-color);
+padding-bottom: 100px;
+}
+
+.testimonials-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap: 30px;
+max-width: 1000px;
+margin: 0 auto;
+}
+
+.testimonial-card {
+background-color: var(--card-bg);
+border: 1px solid var(--border-color);
+border-radius: 12px;
+padding: 30px;
+text-align: left;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.testimonial-card p {
+font-size: 1.1em;
+margin-bottom: 15px;
+color: var(--text-color);
+}
+
+.testimonial-author {
+font-style: italic;
+color: var(--secondary-text-color);
+display: block;
+text-align: right;
+font-weight: 300;
+}
+
+/* CTA Section */
+.cta-section {
+background-color: var(--card-bg);
+padding: 100px 20px;
+text-align: center;
+border-top: 1px solid var(--border-color);
+}
+
+.cta-section .section-header {
+margin-bottom: 0;
+}
+
+.cta-section h2 {
+margin-bottom: 25px;
+}
+
+.cta-section p {
+margin-bottom: 40px;
+}
+
+
+/* Footer */
+.footer {
+background-color: var(--background-color);
+border-top: 1px solid var(--border-color);
+padding: 30px 20px;
+text-align: center;
+font-size: 0.9em;
+color: var(--secondary-text-color);
+}
+
+
+/* --- Top Navigation Bar (Desktop/Tablet) --- */
+.top-navbar {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: var(--top-navbar-height);
+background-color: var(--navbar-bg);
+border-bottom: 1px solid var(--navbar-border);
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+z-index: 1000;
+display: flex; /* Flex container for alignment */
+align-items: center; /* Center items vertically */
+padding: 0 20px; /* Padding for the navbar itself */
+}
+
+.top-navbar-content {
+max-width: 1200px; /* Match max-width of content sections */
+width: 100%;
+margin: 0 auto; /* Center content */
+display: flex;
+justify-content: space-between; /* Space logo and nav links */
+align-items: center;
+}
+
+.top-navbar .logo {
+font-size: 1.3em;
+font-weight: 700;
+color: var(--text-color);
+text-decoration: none;
+background: linear-gradient(to right, var(--primary-accent-dark), var(--primary-accent-light));
+-webkit-background-clip: text;
+background-clip: text; /* Standard property */
+-webkit-text-fill-color: transparent;
+display: inline-block; /* Required for text gradient */
+}
+
+.top-nav-links {
+display: flex;
+align-items: center;
+gap: 25px;
+}
+
+.top-nav-item {
+color: var(--text-color);
+text-decoration: none;
+font-weight: 500;
+padding: 3px 0;
+position: relative;
+transition: color 0.3s ease;
+}
+
+.top-nav-item:not(.button)::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 50%;
+transform: translateX(-50%);
+width: 0;
+height: 2px;
+background-color: var(--primary-accent-light);
+transition: width 0.3s ease;
+}
+
+.top-nav-item:not(.button):hover::after,
+.top-nav-item.active:not(.button)::after {
+width: 100%;
+}
+
+.top-nav-item.active:not(.button) {
+color: var(--primary-accent-dark);
+}
+
+
+/* --- Bottom Navigation Bar (Mobile) --- */
+.bottom-navbar {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: var(--bottom-navbar-height);
+background-color: var(--navbar-bg);
+border-top: 1px solid var(--navbar-border);
+display: flex;
+justify-content: space-around;
+align-items: center;
+padding: 0 10px;
+box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+z-index: 1000;
+}
+
+.nav-item {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-decoration: none;
+color: var(--navbar-item-color);
+font-size: 0.8em;
+font-weight: 600;
+padding: 8px 5px;
+transition: all 0.3s ease;
+flex: 1;
+max-width: 90px;
+}
+
+.nav-item:hover {
+color: var(--navbar-item-active-color);
+transform: translateY(-2px);
+}
+
+.nav-item.active {
+color: var(--navbar-item-active-color);
+}
+
+.nav-icon {
+width: 24px;
+height: 24px;
+margin-bottom: 4px;
+stroke: currentColor;
+transition: stroke 0.3s ease;
+}
+
+.nav-text {
+white-space: nowrap;
+}
+
+
+/* --- Responsive Adjustments for Navbars --- */
+
+/* Hide top navbar and show bottom navbar on mobile */
+@media (max-width: 768px) {
+.top-navbar {
+    display: none;
+}
+.bottom-navbar {
+    display: flex; /* Ensure it's displayed */
+}
+body {
+    padding-top: 0; /* No top padding for top nav */
+    padding-bottom: var(--bottom-navbar-height); /* Space for bottom nav */
+}
+.hero-section {
+    /* Adjust min-height for hero section if no top nav */
+    min-height: calc(100vh - var(--bottom-navbar-height));
+}
+}
+
+/* Hide bottom navbar and show top navbar on larger screens */
+@media (min-width: 769px) {
+.top-navbar {
+    display: flex; /* Ensure it's displayed */
+}
+.bottom-navbar {
+    display: none;
+}
+body {
+    padding-top: var(--top-navbar-height); /* Space for top nav */
+    padding-bottom: 0; /* No bottom padding for bottom nav */
+}
+.hero-section {
+    /* Adjust min-height for hero section with top nav */
+    min-height: calc(100vh - var(--top-navbar-height));
+}
+}
+
+
+/* Animations for Fade-in (Hero Section) */
+@keyframes fadeInUp {
+from {
+    opacity: 0;
+    transform: translateY(20px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+.fade-in-up {
+animation: fadeInUp 0.8s ease-out forwards;
+opacity: 0;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+
+
+/* Animations for Scroll Fade-in (JavaScript controlled) */
+.scroll-fade-in {
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-fade-in.is-visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* General responsive adjustments */
+@media (max-width: 768px) {
+.hero-content h1 {
+    font-size: 3em;
+}
+.hero-content p {
+    font-size: 1.1em;
+}
+.section-header h2 {
+    font-size: 2.5em;
+}
+.section-header p {
+    font-size: 1em;
+}
+.button {
+    width: 100%;
+}
+.features-grid, .testimonials-grid {
+    grid-template-columns: 1fr;
+}
+section {
+    padding: 60px 15px;
+}
+.separator {
+    margin: 60px auto;
+}
+}
+
+@media (max-width: 480px) {
+.hero-content h1 {
+    font-size: 2.5em;
+}
+}
+
+
+
+</style>
+<body>
+
+    <header class="top-navbar">
+        <div class="top-navbar-content">
+            <a href="index.html" class="logo">INVESTOOMS</a>
+            <nav class="top-nav-links">
+                <a href="index.html#hero" class="top-nav-item">Home</a>
+                <a href="#" class="top-nav-item active">Learn More</a>
+                <a href="#" class="top-nav-item button primary-button small-button">Join</a> </nav>
+        </div>
+    </header>
+
+    <section class="hero-section" id="learn-more-hero">
+        <canvas id="heroBackgroundCanvas"></canvas>
+        <div class="animated-gradient-bg"></div>
+        <div class="sparkles-container"></div>
+
+        <div class="hero-content">
+            <h1 class="fade-in-up">
+                <span class="text-dark">Dive Deeper into </span> <br>
+                <span class="text-dark">Intelligent Investing.</span>
+            </h1>
+            <p class="fade-in-up delay-1">
+                Discover how INVESTOOMS empowers you with advanced tools and insights for superior market performance.
+            </p>
+            <div class="hero-buttons fade-in-up delay-2">
+                <a href="index.html#cta" class="button primary-button">Get Started Now</a>
+                <a href="#details" class="button secondary-button">Explore Features</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section scroll-fade-in" id="details">
+        <div class="section-header">
+            <h2 class="gradient-text-blue-purple">More Than Just a Trading App.</h2>
+            <p>INVESTOOMS is built to be your comprehensive partner in the stock market.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card scroll-fade-in">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"></path><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M16.5 16.5l-2.2-2.2"></path><path d="M7.5 7.5l2.2 2.2"></path><path d="M6 18l3-3"></path><path d="M18 6l-3 3"></path></svg>
+                </div>
+                <h3>Advanced Predictive Models</h3>
+                <p>Our AI analyzes vast datasets, identifying hidden patterns and predicting market shifts with surprising accuracy. Gain an edge with forward-looking insights, not just historical data.</p>
+            </div>
+            <div class="feature-card scroll-fade-in">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
+                </div>
+                <h3>Personalized Portfolio Optimization</h3>
+                <p>Based on your risk tolerance and financial goals, our algorithms suggest optimal asset allocations and diversification strategies to maximize returns and minimize risk.</p>
+            </div>
+            <div class="feature-card scroll-fade-in">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V3a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                </div>
+                <h3>Interactive Learning Resources</h3>
+                <p>Whether you're a beginner or an expert, our platform offers curated articles, tutorials, and webinars to enhance your financial literacy and trading skills.</p>
+            </div>
+            <div class="feature-card scroll-fade-in">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </div>
+                <h3>Robust Security & Privacy</h3>
+                <p>We employ bank-grade encryption and multi-factor authentication to protect your investments and personal data, giving you peace of mind.</p>
+            </div>
+            <div class="feature-card scroll-fade-in">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"></path></svg>
+                </div>
+                <h3>Seamless Cross-Device Experience</h3>
+                <p>Access your portfolio and execute trades from your desktop, tablet, or smartphone. Your data syncs instantly, ensuring you're always connected to the market.</p>
+            </div>
+            <div class="feature-card scroll-fade-in">
+                <div class="icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                </div>
+                <h3>Dedicated Customer Support</h3>
+                <p>Our team of financial experts and technical support is available to assist you, ensuring a smooth and successful investing journey.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="separator scroll-fade-in"></div>
+
+    <section class="cta-section scroll-fade-in" id="cta-learn-more">
+        <div class="section-header">
+            <h2 class="gradient-text-green-blue">Ready to Maximize Your Investment Potential?</h2>
+            <p>Join thousands of smart investors who are maximizing their returns with our cutting-edge platform.</p>
+            <a href="index.html#cta" class="button primary-button large-button">Sign Up Now</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        &copy; 2025 INVESTOOMS. All rights reserved.
+    </footer>
+
+    <nav class="bottom-navbar">
+        <a href="index.html#hero" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span class="nav-text">Home</span>
+        </a>
+        <a href="index.html#features" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"></path><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path><path d="M16.5 16.5l-2.2-2.2"></path><path d="M7.5 7.5l2.2 2.2"></path><path d="M6 18l3-3"></path><path d="M18 6l-3 3"></path></svg>
+            <span class="nav-text">Portfolio</span>
+        </a>
+        <a href="index.html#cta" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            <span class="nav-text">Trade</span>
+        </a>
+        <a href="index.html#testimonials" class="nav-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+            <span class="nav-text">News</span>
+        </a>
+        <a href="#" class="nav-item active">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon"><path d="M5.52 19c.64-2.2 1.84-3.98 3.36-5.46 2.03-1.92 4.06-3.84 6.1-5.76C17.5 5.5 19 4 21 4"></path><path d="M4 11V5.5L9.5 4"></path><path d="M20 13v5.5L14.5 20"></path></svg>
+            <span class="nav-text">Learn</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign In</title>
+  <style>
+    body {
+      background-color: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #2f3a8f;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .signin-btn {
+      width: 100%;
+      background-color: #2f3a8f;
+      color: white;
+      padding: 12px 0;
+      font-size: 1rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .forgot {
+      text-align: right;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .forgot a {
+      color: #2f3a8f;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Log In</h2>
+    <p>Welcome back! Please enter your details</p>
+
+    <form onsubmit="event.preventDefault(); signIn();">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <div class="forgot"><a href="#">Forgot password?</a></div>
+      <button type="submit" class="signin-btn">Sign In</button>
+    </form>
+  </div>
+
+  <script>
+    function signIn() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const storedPassword = localStorage.getItem(email + "_password");
+
+      if (storedPassword === password) {
+        localStorage.setItem("currentUser", email);
+        alert("Login successful!");
+        window.location.href = "home1.html";
+      } else {
+        alert("Invalid email or password.");
+      }
+    }
+  </script>
+</body>
+</html>

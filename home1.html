@@ -1,0 +1,300 @@
+<!-- PASTEABLE CODE: home1.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>INVESTOOMS - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      color: #212529;
+    }
+
+    header {
+      background: #fff;
+      padding: 15px 30px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+      color: #333;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stocks-grid, .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 15px;
+    }
+
+    .stock-card {
+      background: #f8f9fc;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    footer {
+      background-color: #ffffff;
+      padding: 40px 80px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-top: 1px solid #ddd;
+      margin-top: 80px;
+    }
+
+    .footer-column h4 {
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      display: block;
+      text-decoration: none;
+      color: #555;
+      margin: 4px 0;
+      font-size: 0.95rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    .price-up { color: #4caf50; font-weight: 600; }
+    .price-down { color: #f44336; font-weight: 600; }
+
+    .news-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .news-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .news-title {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .chart-container {
+      margin-top: 20px;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode header {
+      background-color: #121212;
+      border-bottom: 1px solid #333;
+    }
+
+    body.dark-mode nav a,
+    body.dark-mode .logo,
+    body.dark-mode input[type="text"],
+    body.dark-mode .card,
+    body.dark-mode .stock-card,
+    body.dark-mode footer,
+    body.dark-mode .news-item {
+      color: #ffffff !important;
+      background-color: #1f1f1f !important;
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">INVESTOOMS</div>
+  <nav>
+    <a href="home1.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="transfers.html">Transfers</a>
+    <a href="market.html">Market</a>
+  </nav>
+  <div>
+    <input type="text" placeholder="Search..." />
+    <a href="notification.html" style="color: inherit; text-decoration: none;">🔔</a>
+    <a href="settings.html" style="color: inherit; text-decoration: none;">⚙️</a>
+    <a href="profile.html" style="color: inherit; text-decoration: none;"><span id="welcomeUSer">👤</span></a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>Welcome, <span id="username">User</span></h2>
+    <p id="user-location" style="font-size: 0.9rem; color: gray;">Detecting location...</p>
+    <p>Your Balance: <strong id="balanceAmount">$13,240.11</strong></p>
+    <div id="tradingview-widget" class="chart-container"></div>
+  </div>
+
+  <div class="card">
+    <h2>My Stocks</h2>
+    <div class="stocks-grid" id="stocksList"></div>
+  </div>
+  <div class="card">
+    <h2>Wishlist</h2>
+    <div class="wishlist-grid" id="wishlistList"></div>
+  </div>
+
+  <div class="card full-width-card">
+    <h2>Latest News</h2>
+    <a href="news-interest-rate.html" style="color: inherit; text-decoration: none;"><div class="news-item"><span class="news-badge" style="background:#4169e1;">News</span><div><div class="news-title"><strong>Global Markets React to Interest Rate Decision</strong></div><small>Reuters • 10 mins ago</small></div></div></a>
+    <a href="news-q2-earnings.html" style="color: inherit; text-decoration: none;"><div class="news-item"><span class="news-badge" style="background:#28a745;">Market</span><div><div class="news-title"><strong>Tech Giants Post Strong Q2 Earnings</strong></div><small>Bloomberg • 30 mins ago</small></div></div></a>
+    <a href="news-oil-prices.html" style="color: inherit; text-decoration: none;"><div class="news-item"><span class="news-badge" style="background:#dc3545;">Energy</span><div><div class="news-title"><strong>Oil Prices Fluctuate Amidst Geopolitical Tensions</strong></div><small>CNN • 1 hour ago</small></div></div></a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-column">
+    <h4>INVESTOOMS</h4>
+    <p>Trade smarter, invest confidently.</p>
+    <div class="social-icons">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-linkedin-in"></i>
+    </div>
+  </div>
+  <div class="footer-column"><h4>Company</h4><a href="#">About Us</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Partnerships</a></div>
+  <div class="footer-column"><h4>Resources</h4><a href="#">Blog</a><a href="#">FAQs</a><a href="#">API Docs</a><a href="#">Security</a></div>
+  <div class="footer-column"><h4>Legal</h4><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">Risk Disclosure</a><a href="#">Regulatory Info</a></div>
+</footer>
+
+<div class="footer-bottom">&copy; 2025 INVESTOOMS. All rights reserved. Trading involves risk.</div>
+
+<script>
+  const currencyRates = { USD: 1, EUR: 0.93, GBP: 0.78, JPY: 155.2 };
+  const currencySymbols = { USD: "$", EUR: "€", GBP: "£", JPY: "¥" };
+  const stockData = [
+    { symbol: "spot", name: "Spotify", price: 290.45, change: "+2.94%", direction: "up" },
+    { symbol: "tsla", name: "Tesla", price: 207.47, change: "-3.37%", direction: "down" },
+    { symbol: "nflx", name: "Netflix", price: 260.45, change: "+1.94%", direction: "up" },
+    { symbol: "mcd", name: "McDonald's", price: 274.52, change: "-0.68%", direction: "down" },
+    { symbol: "meta", name: "Meta", price: 502.88, change: "+0.75%", direction: "up" }
+  ];
+  const wishlistData = [
+    { symbol: "amazon", name: "Amazon", price: 185.30, change: "-0.05%", direction: "down" },
+    { symbol: "adobe", name: "Adobe", price: 540.10, change: "+0.32%", direction: "up" },
+    { symbol: "meta", name: "Facebook", price: 490.75, change: "+1.07%", direction: "up" },
+    { symbol: "appl", name: "Apple", price: 170.80, change: "+0.81%", direction: "up" },
+    { symbol: "nflx", name: "Netflix", price: 610.20, change: "-1.29%", direction: "down" }
+  ];
+
+  const currency = localStorage.getItem("selectedCurrency") || "USD";
+  const rate = currencyRates[currency] || 1;
+  const symbol = currencySymbols[currency] || "$";
+
+  function renderStockList(data, containerId) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    data.forEach(stock => {
+      const convertedPrice = (stock.price * rate).toFixed(2);
+      container.innerHTML += `
+        <a href="stock-${stock.symbol}.html" style="text-decoration: none; color: inherit;">
+          <div class="stock-card">
+            <strong>${stock.symbol.toUpperCase()}</strong> - ${stock.name}<br>
+            ${symbol}${convertedPrice} <span class="price-${stock.direction}">${stock.change}</span>
+          </div>
+        </a>`;
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const email = localStorage.getItem("currentUser");
+    const name = localStorage.getItem(email + "_name") || "Guest";
+    document.getElementById("username").textContent = name;
+    document.getElementById("welcomeUSer").textContent = `👤 ${name}`;
+
+    const balance = 13240.11 * rate;
+    document.getElementById("balanceAmount").textContent = `${symbol}${balance.toFixed(2)}`;
+
+    renderStockList(stockData, "stocksList");
+    renderStockList(wishlistData, "wishlistList");
+
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+
+    const theme = localStorage.getItem("theme") === "dark" ? "dark" : "light";
+    const chartContainer = document.getElementById("tradingview-widget");
+    const script = document.createElement("script");
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
+    script.async = true;
+    script.innerHTML = JSON.stringify({
+      "symbol": "NASDAQ:AAPL",
+      "width": "100%",
+      "height": "300",
+      "locale": "en",
+      "dateRange": "1M",
+      "colorTheme": theme,
+      "trendLineColor": "#2196F3",
+      "underLineColor": "rgba(33, 150, 243, 0.12)",
+      "isTransparent": false,
+      "autosize": true
+    });
+    chartContainer.appendChild(script);
+  });
+</script>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const locationElement = document.getElementById("user-location");
+
+    fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        const location = `${data.city}, ${data.country_name}`;
+        locationElement.textContent = `📍 ${location}`;
+      })
+      .catch(error => {
+        console.error("Location detection failed:", error);
+        locationElement.textContent = "📍 Location unavailable";
+      });
+  });
+</script>
+
+
+</body>
+</html>
